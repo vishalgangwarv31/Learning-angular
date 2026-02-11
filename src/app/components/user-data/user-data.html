@@ -1,0 +1,67 @@
+<p>User Management</p>
+
+<div>
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox
+        (change)="toggleAllRows()"
+        [checked]="isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="selection.toggle(row)"
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header>ID </th>
+      <td mat-cell *matCellDef="let user" > {{user.id}}  </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>name </th>
+      <td mat-cell *matCellDef="let user" > {{user.name}}  </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef >email</th>
+      <td mat-cell *matCellDef="let user" > {{user.email}}  </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef >phone</th>
+      <td mat-cell *matCellDef="let user" > {{user.phone}}  </td>
+    </ng-container>
+    <ng-container matColumnDef="website">
+      <th mat-header-cell *matHeaderCellDef >website</th>
+      <td mat-cell *matCellDef="let user" > {{user.website}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-button color="accent" (click)="openEditUserDialog(user)">Edit</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayingColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayingColumns;"></tr>
+  </table>
+  <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      showFirstLastButtons>
+</mat-paginator>
+
+
+<button (click)="export()" >Export</button>
+</div>
+
+<div class="header">
+      <button mat-raised-button color="primary" (click)="openAddUserDailog()">Add User</button>
+    </div>
+
+

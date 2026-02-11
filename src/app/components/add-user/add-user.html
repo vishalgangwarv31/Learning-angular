@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Add New User</h2>
+
+<div mat-dialog-content>
+  <form #userForm="ngForm">
+    <!-- Name Field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        name="name"
+        [(ngModel)]="user.name"
+        required
+        placeholder="Enter full name"
+      />
+      <!-- <mat-error *ngIf="userForm.submitted && !user.name">
+        Name is required
+      </mat-error> -->
+    </mat-form-field>
+
+    <!-- Email Field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        placeholder="Enter email address"
+      />
+      <!-- <mat-error *ngIf="userForm.submitted && !user.email">
+        Email is required
+      </mat-error> -->
+    </mat-form-field>
+
+    <!-- Phone Field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Phone</mat-label>
+      <input
+        matInput
+        name="phone"
+        [(ngModel)]="user.phone"
+        placeholder="Enter phone number"
+      />
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Webiste</mat-label>
+      <input
+        matInput
+        name="website"
+        [(ngModel)]="user.website"
+        placeholder="Enter website"
+      />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onAddUser()"
+    [disabled]="userForm.invalid"
+  >
+    Add
+  </button>
+</div>
