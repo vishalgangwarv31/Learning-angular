@@ -47,17 +47,31 @@ export class UserData implements OnInit {
 
   displayingColumns : String[] = ['select','id' , 'name' , 'email' , 'phone' , 'website','actions'];
 
-  isAllSelected() {
-  const numSelected = this.selection.selected.length;
-  const numRows = this.dataSource.data.length;
-  return numSelected == numRows;
+isAllSelected(): boolean {
+  const pageData = this.dataSource._pageData(this.dataSource.data); // currently viewed rows
+  const numSelected = this.selection.selected.filter(row => pageData.includes(row)).length;
+  const numRows = pageData.length;
+  return numSelected === numRows && numRows > 0;
 }
 
-  toggleAllRows() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+toggleAllVisibleRows() {
+  const pageData = this.dataSource._pageData(this.dataSource.data);
+  if (this.isAllSelected()) {
+    pageData.forEach(row => this.selection.deselect(row));
+  } else {
+    pageData.forEach(row => this.selection.select(row));
   }
+}
+
+selectAllRows() {
+  this.selection.clear();
+  this.dataSource.data.forEach(row => this.selection.select(row));
+}
+
+clearAllSelection() {
+  this.selection.clear();
+}
+
 
   fetchUser(){
     console.log('fetching user')
@@ -105,6 +119,7 @@ export class UserData implements OnInit {
       if (updatedUser) {
         console.log('Updated user received:', updatedUser);
         this.fetchUser();
+        Promise.resolve().then(() => this.selection.clear());
       }
     });
   }

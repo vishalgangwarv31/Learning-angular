@@ -25,7 +25,7 @@ export class EditUserDialogComponent {
     this.userService.editUser(this.user.id.toString(), this.user).subscribe({
       next: (res) => {
         console.log('User updated:', res);
-        this.dialogRef.close(res); // send updated user back
+        this.dialogRef.close(res);
       },
       error: (err) => console.error('Error updating user:', err)
     });
