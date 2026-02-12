@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUser } from '../add-user/add-user';
 import { FormsModule } from '@angular/forms';
 import { EditUserDialogComponent } from '../edit-user-dailog-component/edit-user-dailog-component';
+import { MatAnchor } from "@angular/material/button";
+import { Router } from '@angular/router';
 
 @Component({
 
@@ -22,7 +24,8 @@ import { EditUserDialogComponent } from '../edit-user-dailog-component/edit-user
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatAnchor
 ],
   templateUrl: './user-data.html',
   styleUrl: './user-data.css',
@@ -35,6 +38,7 @@ export class UserData implements OnInit {
   dataSource = new MatTableDataSource<User>([])
   private dailog = inject(MatDialog)
 
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.fetchUser()
@@ -123,6 +127,12 @@ clearAllSelection() {
       }
     });
   }
+
+
+  viewUser(user: any) {
+    this.router.navigate(['/api/view', user.id]);
+  }
+
 
 }
 

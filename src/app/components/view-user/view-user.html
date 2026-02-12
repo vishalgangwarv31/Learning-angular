@@ -1,0 +1,18 @@
+<div class="user-details" *ngIf="user; else loading">
+  <h2>User Details</h2>
+  <mat-card>
+    <mat-card-content>
+      <p><strong>ID:</strong> {{ user.id }}</p>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Phone:</strong> {{ user.phone }}</p>
+      <p><strong>Website:</strong> {{ user.website }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <button mat-stroked-button color="primary" routerLink="/">Back to List</button>
+</div>
+
+<ng-template #loading>
+  <p>Loading user data...</p>
+</ng-template>

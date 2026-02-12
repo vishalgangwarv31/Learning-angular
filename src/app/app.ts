@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { UserData } from './components/user-data/user-data';
+// import { UserData } from './components/user-data/user-data';
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [UserData],
+  imports: [ RouterModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
